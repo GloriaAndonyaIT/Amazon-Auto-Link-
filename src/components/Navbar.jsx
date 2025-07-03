@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,35 +22,35 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a 
-              href="#" 
+            <Link 
+              to="/" 
               className="text-2xl font-bold text-[#FACC15] hover:text-yellow-300 transition-colors duration-200"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Amazon Auto Link
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a 
-                href="#" 
+              <Link 
+                to="/" 
                 className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >
                 Home
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FACC15] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
               
-              <a 
-                href="#" 
+              <Link 
+                to="/fleet" 
                 className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >
                 Fleet cars
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FACC15] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
 
               {/* Products Dropdown */}
               <div className="relative">
@@ -74,35 +75,35 @@ const Navbar = () => {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-[#1E293B] rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 z-50">
                     <div className="py-1">
-                      <a 
-                        href="#" 
+                      <Link 
+                        to="/hotel-booking" 
                         onClick={handleDropdownItemClick}
                         className="block px-4 py-3 text-sm text-white hover:bg-[#334155] hover:text-[#FACC15] transition-colors duration-150"
                         style={{ fontFamily: 'Inter, sans-serif' }}
                       >
                         <div className="font-medium">Hotel Booking</div>
-                      </a>
-                      <a 
-                        href="#" 
+                      </Link>
+                      <Link 
+                        to="/airport-pickup" 
                         onClick={handleDropdownItemClick}
                         className="block px-4 py-3 text-sm text-white hover:bg-[#334155] hover:text-[#FACC15] transition-colors duration-150"
                         style={{ fontFamily: 'Inter, sans-serif' }}
                       >
                         <div className="font-medium">Airport Pickup</div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}
               </div>
 
-              <a 
-                href="#" 
+              <Link 
+                to="/contact" 
                 className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >
                 Contact
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FACC15] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -137,22 +138,22 @@ const Navbar = () => {
       {isNavOpen && (
         <div className="md:hidden bg-[#1E293B] border-t border-slate-700">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a 
-              href="#" 
+            <Link 
+              to="/" 
               onClick={handleNavClick}
               className="text-white hover:text-[#FACC15] hover:bg-[#334155] block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Home
-            </a>
-            <a 
-              href="#" 
+            </Link>
+            <Link 
+              to="/fleet-cars" 
               onClick={handleNavClick}
               className="text-white hover:text-[#FACC15] hover:bg-[#334155] block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Fleet Cars
-            </a>
+            </Link>
             
             {/* Mobile Products Dropdown */}
             <div>
@@ -174,34 +175,34 @@ const Navbar = () => {
               
               {isDropdownOpen && (
                 <div className="mt-1 space-y-1 pl-4">
-                  <a 
-                    href="#" 
+                  <Link 
+                    to="/hotel-booking" 
                     onClick={handleDropdownItemClick}
                     className="text-gray-300 hover:text-[#FACC15] hover:bg-[#334155] block px-3 py-2 text-sm rounded-md transition-colors duration-200"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     Hotel Booking
-                  </a>
-                  <a 
-                    href="#" 
+                  </Link>
+                  <Link 
+                    to="/airport-pickup" 
                     onClick={handleDropdownItemClick}
                     className="text-gray-300 hover:text-[#FACC15] hover:bg-[#334155] block px-3 py-2 text-sm rounded-md transition-colors duration-200"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     Airport Pickup
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
             
-            <a 
-              href="#" 
+            <Link 
+              to="/contact" 
               onClick={handleNavClick}
               className="text-white hover:text-[#FACC15] hover:bg-[#334155] block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       )}

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import Fleet from './pages/Fleet'
+import CarDetails from './pages/CarDetails'
 
 
 function App() {
@@ -15,12 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            {/* <Route path="/fleet" element={<Fleet />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/book" element={<Booking />} /> */}
+            <Route path="/fleet" element={<Fleet />} />
+        
             
             {/* 404 Not Found Route */}
             <Route path="*" element={
