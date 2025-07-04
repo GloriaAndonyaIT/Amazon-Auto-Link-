@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  // Function to handle navigation item clicks (closes mobile menu)
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   const handleNavClick = () => {
     setIsNavOpen(false);
   };
 
-  // Function to handle dropdown item clicks (closes dropdown)
   const handleDropdownItemClick = () => {
     setIsDropdownOpen(false);
-    setIsNavOpen(false); // Also close mobile menu if open
+    setIsNavOpen(false);
   };
 
   return (
@@ -32,8 +51,8 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex space-x-8">
               <Link 
                 to="/" 
                 className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
@@ -105,10 +124,51 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FACC15] transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </div>
+
+            {/* Auth Buttons */}
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/profile"
+                  className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 bg-[#FACC15] text-[#0F172A] rounded-md text-sm font-medium hover:bg-[#F59E0B] transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/login"
+                  className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium transition-colors duration-200"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-4 py-2 bg-[#FACC15] text-[#0F172A] rounded-md text-sm font-medium hover:bg-[#F59E0B] transition-colors"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            {user && (
+              <Link
+                to="/profile"
+                className="text-white hover:text-[#FACC15] px-3 py-2 text-sm font-medium mr-2"
+              >
+                Profile
+              </Link>
+            )}
             <button
               onClick={() => setIsNavOpen(!isNavOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-[#FACC15] hover:bg-[#1E293B] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#FACC15] transition-colors duration-200"
@@ -203,6 +263,35 @@ const Navbar = () => {
             >
               Contact
             </Link>
+
+            {!user ? (
+              <div className="pt-2 space-y-2">
+                <Link
+                  to="/login"
+                  onClick={handleNavClick}
+                  className="block w-full px-3 py-2 text-center text-base font-medium rounded-md text-white bg-[#0F172A] hover:bg-[#1E293B]"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={handleNavClick}
+                  className="block w-full px-3 py-2 text-center text-base font-medium rounded-md text-[#0F172A] bg-[#FACC15] hover:bg-[#F59E0B]"
+                >
+                  Register
+                </Link>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  handleNavClick();
+                  handleLogout();
+                }}
+                className="block w-full px-3 py-2 text-center text-base font-medium rounded-md text-[#0F172A] bg-[#FACC15] hover:bg-[#F59E0B]"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       )}
