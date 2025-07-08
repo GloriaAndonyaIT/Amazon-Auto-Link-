@@ -5,7 +5,14 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Fleet from './pages/Fleet'
 import CarDetails from './pages/CarDetails'
-
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Profile from './pages/Profile'
+import Booking from './pages/Booking'
+import HotelBooking from './pages/HotelBookingForm'
+import AirportPickup from './pages/AirportPickup'
+import Contact from './pages/Contact'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
@@ -18,7 +25,23 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/fleet" element={<Fleet />} />
-        
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/hotel-booking" element={<HotelBooking />} />
+            <Route path="/airport-pickup" element={<AirportPickup />} /> 
+            <Route path="/contact" element={<Contact />} />
+            
+            {/* Protected Routes */}
+            <Route path="/profile" element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            } />
+            <Route path="/book/:id" element={
+              <PrivateRoute>
+                <Booking />
+              </PrivateRoute>
+            } />
             
             {/* 404 Not Found Route */}
             <Route path="*" element={
