@@ -13,6 +13,7 @@ import HotelBooking from './pages/HotelBookingForm'
 import AirportPickup from './pages/AirportPickup'
 import Contact from './pages/Contact'
 import PrivateRoute from './components/PrivateRoute'
+import BookingConfirmation from './pages/BookingConfirmation'
 
 function App() {
   return (
@@ -42,6 +43,11 @@ function App() {
                 <Booking />
               </PrivateRoute>
             } />
+            <Route path="/booking-confirmation/:bookingId" element={
+  <PrivateRoute>
+    <BookingConfirmation />
+  </PrivateRoute>
+} />
             
             {/* 404 Not Found Route */}
             <Route path="*" element={

@@ -84,145 +84,203 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white shadow rounded-lg overflow-hidden">
-          <div className="px-6 py-8 sm:p-10">
-            <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-3xl font-bold text-[#0F172A] mb-2">My Profile</h1>
-                <p className="text-gray-600">Manage your account and bookings</p>
+    <div className="min-h-screen bg-gray-100 w-full overflow-x-hidden">
+      {/* Container with proper overflow control */}
+      <div className="w-full max-w-7xl mx-auto px-3 py-4 sm:px-4 sm:py-6 lg:px-8 lg:py-12">
+        <div className="bg-white shadow rounded-lg overflow-hidden w-full">
+          <div className="p-3 sm:p-6 lg:p-10 w-full">
+            
+            {/* Header - Prevent overflow */}
+            <div className="w-full">
+              <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:justify-between sm:items-start">
+                <div className="min-w-0 flex-1 pr-0 sm:pr-4">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F172A] mb-1 sm:mb-2 break-words">
+                    My Profile
+                  </h1>
+                  <p className="text-sm sm:text-base text-gray-600">
+                    Manage your account and bookings
+                  </p>
+                </div>
+                <div className="flex-shrink-0 w-full sm:w-auto">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full sm:w-auto px-4 py-2 bg-[#0F172A] text-white rounded-md hover:bg-[#1E293B] transition-colors text-sm sm:text-base whitespace-nowrap"
+                  >
+                    Sign Out
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-[#0F172A] text-white rounded-md hover:bg-[#1E293B] transition-colors"
-              >
-                Sign Out
-              </button>
             </div>
 
-            <div className="mt-8 border-t border-gray-200 pt-8">
-              <div className="md:flex md:items-center md:justify-between">
-                <div className="flex-1 min-w-0">
-                  {isEditing ? (
-                    <form onSubmit={handleEditSubmit} className="space-y-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          value={editForm.name}
-                          onChange={(e) => setEditForm({...editForm, name: e.target.value})}
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-[#FACC15]"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                        <input
-                          type="email"
-                          id="email"
-                          value={editForm.email}
-                          onChange={(e) => setEditForm({...editForm, email: e.target.value})}
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-[#FACC15]"
-                        />
-                      </div>
-                      <div className="flex space-x-3">
-                        <button
-                          type="submit"
-                          className="px-4 py-2 bg-[#FACC15] text-[#0F172A] rounded-md hover:bg-[#F59E0B] transition-colors"
-                        >
-                          Save Changes
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setIsEditing(false)}
-                          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                  ) : (
-                    <div>
-                      <h2 className="text-xl font-semibold text-[#0F172A]">Personal Information</h2>
-                      <div className="mt-4 space-y-2">
-                        <p className="text-gray-700"><span className="font-medium">Name:</span> {user?.displayName || 'Not provided'}</p>
-                        <p className="text-gray-700"><span className="font-medium">Email:</span> {user?.email}</p>
-                      </div>
-                      <div className="mt-6 flex space-x-3">
-                        <button
-                          onClick={() => setIsEditing(true)}
-                          className="flex items-center px-4 py-2 bg-[#0F172A] text-white rounded-md hover:bg-[#1E293B] transition-colors"
-                        >
-                          <PencilIcon className="h-5 w-5 mr-2" />
-                          Edit Profile
-                        </button>
-                        <button
-                          onClick={handleDeleteAccount}
-                          className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-                        >
-                          <TrashIcon className="h-5 w-5 mr-2" />
-                          Delete Account
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="mt-8 md:mt-0 md:ml-8">
-                  <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                    {user?.photoURL ? (
-                      <img src={user.photoURL} alt="Profile" className="h-full w-full object-cover" />
+            {/* Profile Information Section */}
+            <div className="mt-6 sm:mt-8 border-t border-gray-200 pt-6 sm:pt-8 w-full">
+              
+              {/* Profile Layout - Prevent overflow */}
+              <div className="w-full">
+                <div className="flex flex-col space-y-6 lg:flex-row lg:space-y-0 lg:space-x-8">
+                  
+                  {/* Profile Details - Full width on mobile */}
+                  <div className="flex-1 min-w-0 w-full lg:w-auto">
+                    {isEditing ? (
+                      <form onSubmit={handleEditSubmit} className="space-y-4 w-full">
+                        <div className="w-full">
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                            Name
+                          </label>
+                          <input
+                            type="text"
+                            id="name"
+                            value={editForm.name}
+                            onChange={(e) => setEditForm({...editForm, name: e.target.value})}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-[#FACC15] text-sm sm:text-base"
+                          />
+                        </div>
+                        <div className="w-full">
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            value={editForm.email}
+                            onChange={(e) => setEditForm({...editForm, email: e.target.value})}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-[#FACC15] text-sm sm:text-base"
+                          />
+                        </div>
+                        <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3 w-full">
+                          <button
+                            type="submit"
+                            className="w-full sm:w-auto px-4 py-2 bg-[#FACC15] text-[#0F172A] rounded-md hover:bg-[#F59E0B] transition-colors text-sm sm:text-base font-medium"
+                          >
+                            Save Changes
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setIsEditing(false)}
+                            className="w-full sm:w-auto px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors text-sm sm:text-base"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </form>
                     ) : (
-                      <span className="text-2xl font-bold text-gray-500">
-                        {user?.displayName?.charAt(0) || user?.email?.charAt(0) || 'U'}
-                      </span>
+                      <div className="w-full">
+                        <h2 className="text-lg sm:text-xl font-semibold text-[#0F172A] mb-4">
+                          Personal Information
+                        </h2>
+                        <div className="space-y-3 mb-6 w-full">
+                          <div className="bg-gray-50 rounded-lg p-3 w-full">
+                            <p className="text-xs sm:text-sm text-gray-500 mb-1">Name</p>
+                            <p className="text-sm sm:text-base text-gray-900 font-medium break-words">
+                              {user?.displayName || 'Not provided'}
+                            </p>
+                          </div>
+                          <div className="bg-gray-50 rounded-lg p-3 w-full">
+                            <p className="text-xs sm:text-sm text-gray-500 mb-1">Email</p>
+                            <p className="text-sm sm:text-base text-gray-900 font-medium break-all">
+                              {user?.email}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3 w-full">
+                          <button
+                            onClick={() => setIsEditing(true)}
+                            className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-[#0F172A] text-white rounded-md hover:bg-[#1E293B] transition-colors text-sm sm:text-base"
+                          >
+                            <PencilIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 flex-shrink-0" />
+                            <span className="whitespace-nowrap">Edit Profile</span>
+                          </button>
+                          <button
+                            onClick={handleDeleteAccount}
+                            className="w-full sm:w-auto flex items-center justify-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm sm:text-base"
+                          >
+                            <TrashIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 flex-shrink-0" />
+                            <span className="whitespace-nowrap">Delete Account</span>
+                          </button>
+                        </div>
+                      </div>
                     )}
+                  </div>
+
+                  {/* Avatar - Prevent overflow */}
+                  <div className="flex-shrink-0 flex justify-center lg:justify-end">
+                    <div className="h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                      {user?.photoURL ? (
+                        <img src={user.photoURL} alt="Profile" className="h-full w-full object-cover" />
+                      ) : (
+                        <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-500">
+                          {user?.displayName?.charAt(0) || user?.email?.charAt(0) || 'U'}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-12">
-              <h2 className="text-xl font-semibold text-[#0F172A]">My Bookings</h2>
+            {/* Bookings Section */}
+            <div className="mt-8 sm:mt-12 border-t border-gray-200 pt-6 sm:pt-8 w-full">
+              <h2 className="text-lg sm:text-xl font-semibold text-[#0F172A] mb-4 sm:mb-6">
+                My Bookings
+              </h2>
+              
               {bookings.length === 0 ? (
-                <div className="mt-6 text-center py-12 bg-gray-50 rounded-lg">
-                  <p className="text-gray-500">You don't have any bookings yet.</p>
-                  <button
-                    onClick={() => navigate('/fleet')}
-                    className="mt-4 px-4 py-2 bg-[#FACC15] text-[#0F172A] rounded-md hover:bg-[#F59E0B] transition-colors"
-                  >
-                    Browse Vehicles
-                  </button>
+                <div className="text-center py-8 sm:py-12 bg-gray-50 rounded-lg w-full">
+                  <div className="max-w-sm mx-auto px-4">
+                    <p className="text-gray-500 text-sm sm:text-base mb-4">
+                      You don't have any bookings yet.
+                    </p>
+                    <button
+                      onClick={() => navigate('/fleet')}
+                      className="w-full sm:w-auto px-6 py-2 bg-[#FACC15] text-[#0F172A] rounded-md hover:bg-[#F59E0B] transition-colors text-sm sm:text-base font-medium"
+                    >
+                      Browse Vehicles
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <div className="mt-6 space-y-4">
+                <div className="space-y-4 w-full">
                   {bookings.map((booking) => (
-                    <div key={booking.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-medium text-lg text-[#0F172A]">{booking.vehicleName}</h3>
-                          <p className="text-gray-600 mt-1">
-                            {new Date(booking.startDate.seconds * 1000).toLocaleDateString()} - {new Date(booking.endDate.seconds * 1000).toLocaleDateString()}
-                          </p>
-                          <div className="mt-2 flex items-center">
-                            <span className={`px-2 py-1 text-xs rounded-full ${booking.status === 'confirmed' ? 'bg-green-100 text-green-800' : booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
-                              {booking.status}
-                            </span>
-                            <span className="ml-4 font-medium text-[#0F172A]">${booking.totalPrice}</span>
+                    <div key={booking.id} className="border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow w-full overflow-hidden">
+                      
+                      {/* Single responsive layout for all screen sizes */}
+                      <div className="w-full">
+                        <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:justify-between sm:items-start">
+                          
+                          {/* Booking Details */}
+                          <div className="flex-1 min-w-0 w-full sm:w-auto sm:pr-4">
+                            <h3 className="font-semibold text-base sm:text-lg text-[#0F172A] mb-1 break-words">
+                              {booking.vehicleName}
+                            </h3>
+                            <p className="text-sm text-gray-600 mb-2 break-words">
+                              {new Date(booking.startDate.seconds * 1000).toLocaleDateString()} - {new Date(booking.endDate.seconds * 1000).toLocaleDateString()}
+                            </p>
+                            <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
+                              <span className={`inline-block px-2 py-1 text-xs rounded-full w-fit ${booking.status === 'confirmed' ? 'bg-green-100 text-green-800' : booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
+                                {booking.status}
+                              </span>
+                              <span className="font-semibold text-[#0F172A] text-sm sm:text-base">
+                                ${booking.totalPrice}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          {booking.status === 'pending' && (
-                            <button
-                              onClick={() => cancelBooking(booking.id)}
-                              className="px-3 py-1 bg-red-100 text-red-800 rounded-md text-sm hover:bg-red-200 transition-colors"
-                            >
-                              Cancel
-                            </button>
-                          )}
-                          <button className="px-3 py-1 bg-gray-100 text-gray-800 rounded-md text-sm hover:bg-gray-200 transition-colors">
-                            Details
-                          </button>
+                          
+                          {/* Action Buttons */}
+                          <div className="flex-shrink-0 w-full sm:w-auto">
+                            <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
+                              {booking.status === 'pending' && (
+                                <button
+                                  onClick={() => cancelBooking(booking.id)}
+                                  className="w-full sm:w-auto px-3 py-2 bg-red-100 text-red-800 rounded-md text-sm hover:bg-red-200 transition-colors whitespace-nowrap"
+                                >
+                                  Cancel
+                                </button>
+                              )}
+                              <button className="w-full sm:w-auto px-3 py-2 bg-gray-100 text-gray-800 rounded-md text-sm hover:bg-gray-200 transition-colors whitespace-nowrap">
+                                Details
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
